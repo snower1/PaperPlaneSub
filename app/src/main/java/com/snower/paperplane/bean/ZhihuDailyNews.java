@@ -7,6 +7,7 @@ import java.util.ArrayList;
  */
 public class ZhihuDailyNews {
 
+    //
     private String date;
     private ArrayList<Question> stories;
 
