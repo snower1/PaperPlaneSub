@@ -73,5 +73,24 @@ public class ZhihuDailyNews {
         public void setType(int type) {
             this.type = type;
         }
+
+        @Override
+        public String toString() {
+            return "Question{" +
+                    "ga_prefix='" + ga_prefix + '\'' +
+                    ", images=" + images +
+                    ", type=" + type +
+                    ", id=" + id +
+                    ", title='" + title + '\'' +
+                    '}';
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "ZhihuDailyNews{" +
+                "date='" + date + '\'' +
+                ", stories=" + stories +
+                '}';
     }
 }
