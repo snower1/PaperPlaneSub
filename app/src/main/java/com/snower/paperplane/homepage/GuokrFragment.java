@@ -7,31 +7,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.snower.paperplane.bean.DoubanMomentNews;
+import com.snower.paperplane.bean.GuokrHandpickNews;
 
 import java.util.ArrayList;
 
 /**
- * Created by rainfool on 2017/3/21.
+ * Created by rainfool on 2017/3/22.
  */
-public class DoubanMomentFragment extends Fragment implements DoubanMomentContract.view {
+public class GuokrFragment extends Fragment implements GuokrContract.View {
 
-    private static volatile DoubanMomentFragment doubanMomentFragment;
+    private static volatile GuokrFragment guokrFragment;
 
-    public static DoubanMomentFragment getInstance(){
-        if (null == doubanMomentFragment) {
-            synchronized (DoubanMomentFragment.class) {
-                if (null == doubanMomentFragment) {
-                    doubanMomentFragment = new DoubanMomentFragment();
+    public static GuokrFragment getInstance() {
+        if (null == guokrFragment) {
+            synchronized (GuokrFragment.class) {
+                if (null == guokrFragment) {
+                    guokrFragment = new GuokrFragment();
                 }
             }
         }
-        return doubanMomentFragment;
-    }
-
-    @Override
-    public void showResult(ArrayList<DoubanMomentNews.posts> list) {
-
+        return guokrFragment;
     }
 
     @Override
@@ -46,12 +41,17 @@ public class DoubanMomentFragment extends Fragment implements DoubanMomentContra
     }
 
     @Override
-    public void showLoadingError() {
+    public void showError() {
 
     }
 
     @Override
-    public void startLoading() {
+    public void showResults(ArrayList<GuokrHandpickNews.result> list) {
+
+    }
+
+    @Override
+    public void showLoading() {
 
     }
 
