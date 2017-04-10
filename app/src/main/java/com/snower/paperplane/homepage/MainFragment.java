@@ -1,9 +1,20 @@
 package com.snower.paperplane.homepage;
 
-import android.app.Fragment;
-
 /**
  * Created by rainfool on 2017/3/22.
  */
-public class MainFragment extends Fragment {
+public class MainFragment extends android.support.v4.app.Fragment {
+
+    private static volatile MainFragment mainFragment;
+
+    public static MainFragment getInstance(){
+        if (null == mainFragment){
+            synchronized (MainFragment.class){
+                if (null == mainFragment){
+                    mainFragment = new MainFragment();
+                }
+            }
+        }
+        return mainFragment;
+    }
 }
