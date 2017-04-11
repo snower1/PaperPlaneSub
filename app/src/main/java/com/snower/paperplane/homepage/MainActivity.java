@@ -1,9 +1,10 @@
 package com.snower.paperplane.homepage;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -52,11 +53,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         new BookmarksPresenter(this , bookmarksFragment);
 
+        showMainFragment();
+
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        return false;
+        drawerLayout.closeDrawer(GravityCompat.START);
+
+        switch (item.getItemId()){
+            case R.id.nav_home:
+                showMainFragment();
+                break;
+            case R.id.nav_bookmarks:
+                showBookmarksFragment();
+                break;
+            case R.id.nav_change_theme:
+                break;
+            case R.id.nav_settings:
+                break;
+            case R.id.nav_about:
+                break;
+        }
+        return true;
     }
 
     private void initView(){
@@ -72,23 +91,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-    }
 
     private void showMainFragment(){
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.show(mainFragment);
+        fragmentTransaction.hide(bookmarksFragment);
+        fragmentTransaction.commit();
 
-
+        toolbar.setTitle(getResources().getString(R.string.app_name));
     }
 
     private void showBookmarksFragment(){
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.show(bookmarksFragment);
+        fragmentTransaction.hide(mainFragment);
+        fragmentTransaction.commit();
 
+        toolbar.setTitle(getResources().getString(R.string.nav_bookmarks));
+
+        if (bookmarksFragment.isAdded()){
+            bookmarksFragment.notifyDataChanged();
+        }
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
-        super.onSaveInstanceState(outState, outPersistentState);
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
 
         if (mainFragment.isAdded()){
             getSupportFragmentManager().putFragment(outState , "MainFragment" , mainFragment);

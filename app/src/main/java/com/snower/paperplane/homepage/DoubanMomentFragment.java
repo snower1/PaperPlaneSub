@@ -1,6 +1,5 @@
 package com.snower.paperplane.homepage;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -14,7 +13,7 @@ import java.util.ArrayList;
 /**
  * Created by rainfool on 2017/3/21.
  */
-public class DoubanMomentFragment extends Fragment implements DoubanMomentContract.view {
+public class DoubanMomentFragment extends android.support.v4.app.Fragment implements DoubanMomentContract.view {
 
     private static volatile DoubanMomentFragment doubanMomentFragment;
 

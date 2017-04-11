@@ -1,6 +1,5 @@
 package com.snower.paperplane.homepage;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -14,7 +13,7 @@ import java.util.ArrayList;
 /**
  * Created by rainfool on 2017/3/8.
  */
-public class ZhihuDailyFragment extends Fragment implements ZhihuDailyContract.View{
+public class ZhihuDailyFragment extends android.support.v4.app.Fragment implements ZhihuDailyContract.View{
 
     public static ZhihuDailyFragment getNewInstance(){
         return new ZhihuDailyFragment();

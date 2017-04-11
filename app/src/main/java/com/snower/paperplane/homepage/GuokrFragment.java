@@ -1,6 +1,5 @@
 package com.snower.paperplane.homepage;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -14,7 +13,7 @@ import java.util.ArrayList;
 /**
  * Created by rainfool on 2017/3/22.
  */
-public class GuokrFragment extends Fragment implements GuokrContract.View {
+public class GuokrFragment extends android.support.v4.app.Fragment implements GuokrContract.View {
 
     private static volatile GuokrFragment guokrFragment;
 
