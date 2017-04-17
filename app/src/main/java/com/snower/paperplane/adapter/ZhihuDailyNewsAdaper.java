@@ -32,10 +32,10 @@ public class ZhihuDailyNewsAdaper extends RecyclerView.Adapter<RecyclerView.View
     //加载更多
     private static final int TYPE_FOOTER = 1;
 
-    public ZhihuDailyNewsAdaper(LayoutInflater inflater, Context context, ArrayList<ZhihuDailyNews.Question> list) {
-        this.inflater = inflater;
+    public ZhihuDailyNewsAdaper(Context context, ArrayList<ZhihuDailyNews.Question> list) {
         this.context = context;
         this.list = list;
+        this.inflater = LayoutInflater.from(context);
     }
 
     @Override
