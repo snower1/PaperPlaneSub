@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 
 import com.snower.paperplane.R;
 import com.snower.paperplane.adapter.MainPagerAdapter;
+import com.snower.paperplane.utils.Tools;
 
 import java.util.Random;
 
@@ -53,6 +55,7 @@ public class MainFragment extends android.support.v4.app.Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Tools.printMsg("mainFragment oncreate");
         context = getActivity();
         if (null != savedInstanceState){
             zhihuDailyFragment = (ZhihuDailyFragment) getChildFragmentManager().getFragment(savedInstanceState , "zhihuDailyFragment");
@@ -71,6 +74,7 @@ public class MainFragment extends android.support.v4.app.Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Tools.printMsg("mainFragement onCreateView");
         View view = inflater.inflate(R.layout.fragment_main , container , false);
         initView(view);
 

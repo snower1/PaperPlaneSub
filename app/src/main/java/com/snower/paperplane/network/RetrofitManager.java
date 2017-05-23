@@ -2,6 +2,7 @@ package com.snower.paperplane.network;
 
 import com.snower.paperplane.BuildConfig;
 import com.snower.paperplane.utils.Api;
+import com.snower.paperplane.utils.Tools;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -51,6 +52,7 @@ public class RetrofitManager {
     }
 
     public ZhihuService getZhihuService(){
+        Tools.printMsg("");
         return retrofit.create(ZhihuService.class);
     }
 }

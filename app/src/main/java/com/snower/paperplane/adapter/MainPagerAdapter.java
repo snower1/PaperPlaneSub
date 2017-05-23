@@ -9,12 +9,13 @@ import com.snower.paperplane.R;
 import com.snower.paperplane.homepage.DoubanMomentFragment;
 import com.snower.paperplane.homepage.GuokrFragment;
 import com.snower.paperplane.homepage.ZhihuDailyFragment;
+import com.snower.paperplane.utils.Tools;
 
 /**
  * Created by hx on 2017-4-11.
  */
 
-public class MainPagerAdapter extends FragmentPagerAdapter {
+public class MainPagerAdapter extends FragmentPagerAdapter{
 
     private String[] titles;
     private Context context;
@@ -52,6 +53,8 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
+        Tools.printMsg("MainPagerAdapter getItem");
+        Tools.printMsg("position= " + position);
         switch (position){
             case 0:
                 return zhihuDailyFragment;
@@ -63,6 +66,8 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
         return zhihuDailyFragment;
     }
 
+
+
     @Override
     public int getCount() {
         return titles.length;
@@ -72,4 +77,5 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         return titles[position];
     }
+
 }

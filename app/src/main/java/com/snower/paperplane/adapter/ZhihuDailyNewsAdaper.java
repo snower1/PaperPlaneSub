@@ -13,6 +13,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.snower.paperplane.R;
 import com.snower.paperplane.bean.ZhihuDailyNews;
 import com.snower.paperplane.interfaze.OnRecyclerViewOnClickListener;
+import com.snower.paperplane.utils.Tools;
 
 import java.util.ArrayList;
 
@@ -33,6 +34,7 @@ public class ZhihuDailyNewsAdaper extends RecyclerView.Adapter<RecyclerView.View
     private static final int TYPE_FOOTER = 1;
 
     public ZhihuDailyNewsAdaper(Context context, ArrayList<ZhihuDailyNews.Question> list) {
+        Tools.printMsg("ZhihuDailyNewsAdaper()");
         this.context = context;
         this.list = list;
         this.inflater = LayoutInflater.from(context);
@@ -40,6 +42,7 @@ public class ZhihuDailyNewsAdaper extends RecyclerView.Adapter<RecyclerView.View
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        Tools.printMsg("onCreateViewHolder()");
         switch (viewType){
             case TYPE_NORMAL:
                 return new NormalViewHolder(inflater.inflate(R.layout.home_list_item_layout, parent, false), mListener);
@@ -51,6 +54,7 @@ public class ZhihuDailyNewsAdaper extends RecyclerView.Adapter<RecyclerView.View
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        Tools.printMsg("onBindViewHolder()");
         if (holder instanceof NormalViewHolder){
             ZhihuDailyNews.Question item = list.get(position);
             if (item.getImages().get(0) == null){
@@ -72,6 +76,7 @@ public class ZhihuDailyNewsAdaper extends RecyclerView.Adapter<RecyclerView.View
 
     @Override
     public int getItemViewType(int position) {
+        Tools.printMsg("getItemViewType()");
         if (position == list.size()){
             return ZhihuDailyNewsAdaper.TYPE_FOOTER;
         }
@@ -80,10 +85,12 @@ public class ZhihuDailyNewsAdaper extends RecyclerView.Adapter<RecyclerView.View
 
     @Override
     public int getItemCount() {
+        Tools.printMsg("");
         return list.size() + 1;
     }
 
     public void setItemClickListener(OnRecyclerViewOnClickListener listener) {
+        Tools.printMsg("");
         this.mListener = listener;
     }
 
@@ -96,6 +103,8 @@ public class ZhihuDailyNewsAdaper extends RecyclerView.Adapter<RecyclerView.View
         public NormalViewHolder(View itemView, OnRecyclerViewOnClickListener listener) {
             super(itemView);
             this.listener = listener;
+            this.itemImg = (ImageView) itemView.findViewById(R.id.imageViewCover);
+            this.tvLatestNewsTitle = (TextView) itemView.findViewById(R.id.textViewTitle) ;
             itemImg.setOnClickListener(this);
         }
 
