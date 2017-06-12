@@ -2,6 +2,8 @@ package com.snower.paperplane.homepage;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TabLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +16,8 @@ import com.snower.paperplane.adapter.ZhihuDailyNewsAdaper;
 import com.snower.paperplane.bean.ZhihuDailyNews;
 import com.snower.paperplane.interfaze.OnRecyclerViewOnClickListener;
 import com.snower.paperplane.utils.Tools;
+import com.wdullaer.materialdatetimepicker.date.DatePickerController;
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -31,6 +35,10 @@ public class ZhihuDailyFragment extends android.support.v4.app.Fragment implemen
     private RecyclerView recyclerView;
 
     private SwipeRefreshLayout swipeRefreshLayout;
+
+    private FloatingActionButton fab;
+
+    private TabLayout tabLayout;
 
     private int mYear = Calendar.getInstance().get(Calendar.YEAR);
     private int mMonth = Calendar.getInstance().get(Calendar.MONTH);
@@ -55,9 +63,41 @@ public class ZhihuDailyFragment extends android.support.v4.app.Fragment implemen
         initViews(view);
         Calendar temp = Calendar.getInstance();
         temp.clear();
-        temp.set(2017, 3, 18);
+        temp.set(mYear, mMonth, mDay);
         presenter.loadPosts(temp.getTimeInMillis(), true);
 
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tabLayout.getSelectedTabPosition() == 0) {
+                    Calendar now = Calendar.getInstance();
+                    now.set(mYear , mMonth , mDay);
+                    DatePickerDialog datePickerDialog = DatePickerDialog.newInstance(new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+                            mYear = year;
+                            mMonth = monthOfYear;
+                            mDay = dayOfMonth;
+                            Calendar temp = Calendar.getInstance();
+                            temp.clear();
+                            temp.set(mYear , mMonth , mDay);
+                            presenter.loadPosts(temp.getTimeInMillis() , true
+                            );
+
+                        }
+                    }, now.get(Calendar.YEAR) , now.get(Calendar.MONTH) , now.get(Calendar.DAY_OF_MONTH));
+                    datePickerDialog.setMaxDate(Calendar.getInstance());
+                    Calendar minDate = Calendar.getInstance();
+                    minDate.clear();
+                    minDate.set(2013 , 5 , 20);
+                    datePickerDialog.setMinDate(minDate);
+                    datePickerDialog.vibrate(false);
+                    datePickerDialog.show(getActivity().getFragmentManager() , "datePickerDialog");
+                }else {
+
+                }
+            }
+        });
         return view;
     }
 
@@ -116,5 +156,7 @@ public class ZhihuDailyFragment extends android.support.v4.app.Fragment implemen
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
+        tabLayout = (TabLayout) getActivity().findViewById(R.id.tab_layout);
     }
 }
